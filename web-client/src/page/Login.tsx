@@ -69,6 +69,10 @@ function SignIn() {
       });
     };
 
+    const handleRegister = () => {
+        navigate('/register');
+      };
+
     useEffect(() => {
       localStorage.removeItem('user')
   })
@@ -112,10 +116,14 @@ function SignIn() {
               </Box>
         <div className='login-with'>OR LOGIN WITH</div>
         <div className='horizontal-rule' />
+        <center>
+            <h6>Don't have account?</h6>
+        </center>
         <Button
                     type="submit"
                     variant="contained"
-                    sx={{ mt: 4, mb: 2, width: '500px', height: '35px' }}
+                    sx={{ mt: 1, mb: 2, width: '500px', height: '35px' }}
+                    onClick={handleRegister}
                 >
                     Register
                 </Button>
