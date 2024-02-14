@@ -28,7 +28,7 @@ const Home: React.FC = () => {
     <div>
       <Navbar />
       {error && <div>{error}</div>}
-      <ImageList sx={{ width: '60%', height: '60%' }} gap={0}>
+      <ImageList sx={{ width: '40%', height: '40%' }} cols={3} gap={0}>
         {images.map((image) => {
           console.log("Image data:", image.attributes.picture.data[0].attributes.url);
           return (
@@ -36,6 +36,7 @@ const Home: React.FC = () => {
               <img
                 src={`${conf.apiPrefix}${image.attributes.picture.data[0].attributes.url}`}
                 alt={image.attributes.Title}
+                style={{ width: '80%', height: '80%' }}
               />
               <div>{image.attributes.Title}</div>
             </ImageListItem>
