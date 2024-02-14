@@ -18,7 +18,6 @@ function SignIn() {
 
     const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      console.log(user);
   
       const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user.identifier);
       
@@ -26,7 +25,6 @@ function SignIn() {
         const url = `${conf.apiPrefix}/api/auth/local`
         try {
           const { data } = await axios.post(url, user)
-          console.log(data)
           if (data.jwt) {
             Swal.fire({
               icon: 'success',

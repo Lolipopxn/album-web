@@ -18,13 +18,13 @@ function SignUp() {
 
     const handleSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      console.log(user);
+
       
       if (!user.email || !user.password || !user.username || !confirm) {
         Swal.fire({
           icon: 'error',
-          title: 'ข้อมูลผิดพลาด',
-          text: 'กรุณากรอกข้อมูลให้ครบถ้วน',
+          title: 'error',
+          text: 'Incomplete information',
         });
         return;
       }
@@ -32,8 +32,8 @@ function SignUp() {
       if (!user.email || !/@(email\.psu\.ac\.th|psu\.ac\.th|gmail\.com)$/.test(user.email)) {
         Swal.fire({
           icon: 'error',
-          title: 'ข้อมูลผิดพลาด',
-          text: 'กรุณากรอกอีเมล์ PSU',
+          title: 'Invalid email ',
+          text: 'Check the correct of the email',
         });
         return;
       }
@@ -44,8 +44,8 @@ function SignUp() {
         })
         Swal.fire({
           icon: 'error',
-          title: 'ข้อมูลผิดพลาด',
-          text: 'รหัสผ่านไม่เหมือนกัน',
+          title: 'Password error',
+          text: 'Passwords do not match',
         })
         return;
       }
@@ -54,11 +54,10 @@ function SignUp() {
       try {
         if (user.email && user.password && user.username) {
           const res = await axios.post(url, user)
-          console.log(res.data)
           Swal.fire({
             icon: 'success',
-            title: 'สำเร็จ',
-            text: 'การลงทะเบียน'
+            title: 'success',
+            text: 'Register complete'
           })
           navigate('/login', { replace: true })
         } 
@@ -81,20 +80,11 @@ function SignUp() {
     };
     const CheckEmail = (event: { target: { name: string; value: string; }; }) => {
         setUser({ ...user, [event.target.name]: event.target.value });      
-        if (
-          event.target.name === "email" &&
-          !event.target.value.endsWith("@gmail.com")
-        ) {
-          setUser({
-            ...user,
-            [event.target.name]: `${event.target.value}@gmail.com`,
-          });
-        }
-      }; 
+    }; 
 
-      const handleLogin = () => {
+    const handleLogin = () => {
         navigate('/login');
-      };
+    };
   
     return (
         <div className='main-bg'>
