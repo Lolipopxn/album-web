@@ -1,0 +1,32 @@
+.main-screen {
+    background-color: rgba(222, 207, 207, 0.676);
+    height: 100vh;
+    width: 100vw;
+}
+
+video {
+    height: 100vh;
+    width: 70vw;
+    margin-right: auto;
+}
+
+@media only screen and (max-width: 360px) {
+    video {
+        height: 100vh;
+        width: 70vw;
+    }
+}
+  
+@media only screen and (min-width: 495px) {
+    video {
+        height: 100%;
+        width: 100%;
+    }
+}
+  
+@media only screen and (min-width: 1280px) {
+    video {
+        height: 99.4vh;
+        width: 80vw;
+    }
+}
