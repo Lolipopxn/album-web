@@ -5,10 +5,21 @@ import ImageListItem from '@mui/material/ImageListItem';
 import Image from '../Models/Model_image';
 import { ImageRepository } from '../Repository/ImageRepository';
 import conf from "../conf";
+import { Navigate, useNavigate } from 'react-router-dom';
 
-const Home: React.FC = () => {
+const getUser = () => {
+  const User = localStorage.getItem("user") || "";
+  if (User) {
+    return JSON.parse(User);
+  }
+  return false;
+};
+
+const Home = () => {
   const [images, setImages] = useState<Image[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const userData = getUser();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -24,27 +35,32 @@ const Home: React.FC = () => {
     fetchImages();
   }, []);
 
-  return (
-    <div>
-      <Navbar />
-      {error && <div>{error}</div>}
-      <ImageList sx={{ width: '40%', height: '40%' }} cols={3} gap={0}>
-        {images.map((image) => {
-          console.log("Image data:", image.attributes.picture.data[0].attributes.url);
-          return (
-            <ImageListItem key={image.id}>
-              <img
-                src={`${conf.apiPrefix}${image.attributes.picture.data[0].attributes.url}`}
-                alt={image.attributes.Title}
-                style={{ width: '80%', height: '80%' }}
-              />
-              <div>{image.attributes.Title}</div>
-            </ImageListItem>
-          );
-        })}
-      </ImageList>
-    </div>
-  );
+  if (!userData) {
+    return <Navigate to="/mainLogin" />;
+
+  } else {
+      return (
+        <div>
+          <Navbar />
+          {error && <div>{error}</div>}
+          <ImageList sx={{ width: '40%', height: '40%' }} cols={3} gap={0}>
+            {images.map((image) => {
+              console.log("Image data:", image.attributes.picture.data[0].attributes.url);
+              return (
+                <ImageListItem key={image.id}>
+                  <img
+                    src={`${conf.apiPrefix}${image.attributes.picture.data[0].attributes.url}`}
+                    alt={image.attributes.Title}
+                    style={{ width: '80%', height: '80%' }}
+                  />
+                  <div>{image.attributes.Title}</div>
+                </ImageListItem>
+              );
+            })}
+          </ImageList>
+        </div>
+      );
+  }
 };
 
 export default Home;

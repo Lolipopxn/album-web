@@ -31,7 +31,7 @@ export default function Navbar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Godzilla
           </Typography>
-          <Button color="inherit" onClick={handleLoginClick}>
+          <Button sx={{ mr: 3}} color="inherit" onClick={handleLoginClick}>
             Login
           </Button>
           <MenuIcon />
