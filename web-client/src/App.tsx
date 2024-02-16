@@ -4,6 +4,7 @@ import Home from './page/Home';
 import Login from './page/Login';
 import Register from "./page/Register";
 import MainLogin from './page/PageGeneral';
+import Add from './page/pageAdd';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/mainLogin" element={<MainLogin />} />
+        <Route path="/Add" element={<Add />} />
       </Routes>
     </BrowserRouter>
   );

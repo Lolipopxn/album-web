@@ -11,6 +11,8 @@ import Menu from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import { createSvgIcon } from '@mui/material/utils';
+
 
 const settings = ['Profile', 'Logout'];
 
@@ -21,6 +23,19 @@ const getUser = () => {
   }
   return false;
 };
+
+const PlusIcon = createSvgIcon(
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    fill="none"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
+    stroke="currentColor"
+  >
+    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+  </svg>,
+  'Plus',
+);
 
 export default function Navbar() {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -44,6 +59,10 @@ export default function Navbar() {
       navigate('/')
   }
 
+  const handleAdd = () => {
+    navigate('/Add')
+}
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: '#8e24aa' }}>
@@ -61,6 +80,10 @@ export default function Navbar() {
             Godzilla
           </Typography>
 
+          <IconButton sx={{mr: 2}} onClick={handleAdd}>
+            <PlusIcon sx={{color: '#FFFFFF'}}/>
+          </IconButton>
+            
           <Typography variant="body2" sx={{ mr: 1, color: 'white' }}>
             {userData.username}
           </Typography>
