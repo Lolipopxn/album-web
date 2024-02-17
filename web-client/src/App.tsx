@@ -5,6 +5,7 @@ import Login from './page/Login';
 import Register from "./page/Register";
 import MainLogin from './page/PageGeneral';
 import Add from './page/pageAdd';
+import ViewGallery from './page/ViewMyGallery';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/mainLogin" element={<MainLogin />} />
         <Route path="/Add" element={<Add />} />
+        <Route path="/ViewGallery" element={<ViewGallery/>} />
       </Routes>
     </BrowserRouter>
   );
