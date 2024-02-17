@@ -1,9 +1,5 @@
-export default interface Role {
-    id: number;
+export default interface User {
     username: string;
-    role: {
-      id: number;
-      name: string;
-      type: string;
-    };
-  }
+    email: string;
+    jwt: string;
+}
