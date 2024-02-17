@@ -1,0 +1,9 @@
+.image-add {
+    border: "2px dashed #ccc";
+    padding: "100px";
+    max-width: "300px";
+    margin-Top: "50px";
+    margin-Left: "400px";
+    text-Align: "center";
+    cursor: "pointer";
+}
