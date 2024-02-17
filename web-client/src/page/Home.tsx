@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
-import ImageList from '@mui/material/ImageList';
-import ImageListItem from '@mui/material/ImageListItem';
 import Image from '../Models/Model_image';
 import { ImageRepository } from '../Repository/ImageRepository';
 import conf from "../conf";
 import { Navigate, useNavigate } from 'react-router-dom';
+import '../StyleCSS/Gallery.css';
 
 const getUser = () => {
   const User = localStorage.getItem("user") || "";
@@ -42,23 +41,19 @@ const Home = () => {
       return (
         <div>
           <Navbar />
+          <div className='gallery'>
           {error && <div>{error}</div>}
-          <ImageList sx={{ width: '40%', height: '40%' }} cols={3} gap={0}>
             {images.map((image) => {
-              console.log("Image data:", image.attributes.picture.data[0].attributes.url);
               return (
-                <ImageListItem key={image.id}>
+                <div className='class="card"' key={image.id}>
                   <img
                     src={`${conf.apiPrefix}${image.attributes.picture.data[0].attributes.url}`}
                     alt={image.attributes.Title}
-                    style={{ width: '80%', height: '80%' }}
                   />
-                  <div>{image.attributes.Title}</div>
-                </ImageListItem>
+                </div>
               );
-            })}
-          </ImageList>
-        </div>
+            })}</div>
+          </div>
       );
   }
 };

@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import videoBg from '../Videos/Photo_video.mp4';
-import './pageGeneral.css';
+import '../StyleCSS/pageGeneral.css';
 import Button from '@mui/material/Button';
 
 function MainLogin() {

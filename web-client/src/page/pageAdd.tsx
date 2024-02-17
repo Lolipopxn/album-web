@@ -6,7 +6,7 @@ import User from "../Models/Model_User";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
 import { Grid } from '@mui/material';
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import NavbarLeft from "../components/NavbarLeft";
 
 const Add = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -90,7 +90,10 @@ const Add = () => {
           title: 'Complete!',
           icon: 'success',
           text: 'Add complete',
+        }).then(() => {
+          window.location.reload();
         });
+        
       } else {
         console.error(`Failed to add image. Status code: ${response.status}`);
         MySwal.fire({
@@ -109,8 +112,11 @@ const Add = () => {
     }
   };
 
+
   return (
+    
     <div>
+      <NavbarLeft />
       <form onSubmit={handleSubmit}>
         <div
           style={{
