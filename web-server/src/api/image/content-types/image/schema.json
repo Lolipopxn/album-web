@@ -32,6 +32,10 @@
     "email": {
       "type": "email",
       "required": true
+    },
+    "user_name": {
+      "type": "string",
+      "required": true
     }
   }
 }

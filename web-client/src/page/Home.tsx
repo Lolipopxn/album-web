@@ -105,7 +105,7 @@ const Home = () => {
           </DialogContent>
         </Grid>
           <Grid item xs={6}> 
-           <Grid item xs={11} mt={3}>
+           <Grid item xs={12} mt={3}>
              
              <Stack
               direction="row"
@@ -129,10 +129,10 @@ const Home = () => {
               </Box>
             </Stack>
             <Stack sx={{mt: 3}} justifyContent="flex-start" spacing={1.5}>
-              <span>User:</span>
-              <span>Email: {selectedImage?.attributes.email}</span>
-              <span>Title: {selectedImage?.attributes.Title}</span>
-              <span>Description:  {selectedImage?.attributes.description || "-----------"}</span>
+              <span className='Font-Style'>User: {selectedImage?.attributes.user_name}</span>
+              <span className='Font-Style'>Email: {selectedImage?.attributes.email}</span>
+              <span className='Font-Style'>Title: {selectedImage?.attributes.Title}</span>
+              <span className='Font-Style'>Description: {selectedImage?.attributes.description || "-----------"}</span>
             </Stack>
           </Grid>
         </Grid>

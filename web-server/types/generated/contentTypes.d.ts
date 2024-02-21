@@ -378,6 +378,7 @@ export interface ApiImageImage extends Schema.CollectionType {
     Title: Attribute.String;
     description: Attribute.Text;
     email: Attribute.Email & Attribute.Required;
+    user_name: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -74,6 +74,7 @@ const Add = () => {
     formData.append("data", JSON.stringify({
       Title,
       description,
+      user_name: user.username,
       email: user.email,
     }));
 

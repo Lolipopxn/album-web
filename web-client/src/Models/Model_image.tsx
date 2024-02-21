@@ -4,6 +4,7 @@ export default interface Image {
       Title: string;
       description: string;
       email: string;
+      user_name: string;
       picture: {
         data: [{
           attributes: {

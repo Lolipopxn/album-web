@@ -50,7 +50,7 @@ export default function Navbar() {
             <HomeIcon sx={{ ml: 1 }} /> 
             :<>
                 <HomeIcon sx={{ ml: 1 }} /> 
-                <span>Home</span>
+                <span className='EditFont'>Home</span>
             </>
             
             }
@@ -60,7 +60,7 @@ export default function Navbar() {
                 <AddIcon sx={{ ml: 1 }} /> 
             :<>
                 <AddIcon sx={{ ml: 1 }}/> 
-                <span>Add</span>
+                <span className='EditFont'>Add</span>
             </>
             
             }
@@ -70,7 +70,7 @@ export default function Navbar() {
                 <ImageIcon sx={{ ml: 1 }} /> 
             :<>
                 <ImageIcon sx={{ ml: 1 }} /> 
-                <span>Edit</span>
+                <span className='EditFont'>Edit</span>
             </>
             
             }

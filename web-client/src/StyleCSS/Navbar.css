@@ -41,8 +41,8 @@
     border:2px solid #121212;
     border-radius: 4px;
   }
-
-  span {
+  
+  .EditFont{
     cursor: pointer;
     transition: 0.5s all ease;
     margin-left: 20px;
@@ -50,4 +50,3 @@
     font-weight: 600;
     font-size: 15px;
   }
-  
