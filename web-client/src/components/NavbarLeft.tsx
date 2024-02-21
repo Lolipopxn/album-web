@@ -55,7 +55,7 @@ export default function Navbar() {
             
             }
         </a> 
-        <a className='active' onClick={handleHome}>
+        <a className='active' onClick={handleAdd}>
             {collapsed ?
                 <AddIcon sx={{ ml: 1 }} /> 
             :<>
@@ -65,7 +65,7 @@ export default function Navbar() {
             
             }
         </a> 
-        <a className='active' onClick={handleHome}>
+        <a className='active' onClick={handleUserPrivate}>
             {collapsed ?
                 <ImageIcon sx={{ ml: 1 }} /> 
             :<>

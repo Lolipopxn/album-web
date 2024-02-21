@@ -12,6 +12,7 @@ img {
   display: block;
   object-fit: cover;
   border-radius: 30px;
+  border: 3px solid #d9d2d2 ;
 }
 
 .gallery {
@@ -116,4 +117,9 @@ img {
   .card:nth-child(6) {
     grid-area: 2 / 2 / span 1 / span 1;
   }
+}
+
+span{
+  font-size: 12px;
+  font-style: italic;
 }

@@ -5,6 +5,7 @@ import { ImageRepository } from '../Repository/ImageRepository';
 import conf from "../conf";
 import { Navigate, useNavigate } from 'react-router-dom';
 import '../StyleCSS/Gallery.css';
+import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Stack } from '@mui/material';
 
 const getUser = () => {
   const User = localStorage.getItem("user") || "";
@@ -19,6 +20,7 @@ const Home = () => {
   const [error, setError] = useState<string | null>(null);
   const userData = getUser();
   const navigate = useNavigate();
+  const [selectedImage, setSelectedImage] = useState<Image | null>(null);
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -34,28 +36,111 @@ const Home = () => {
     fetchImages();
   }, []);
 
+  const handleDownload = async (imageId: string, imageName: string) => {
+    try {
+      const response = await fetch(`${conf.apiPrefix}${imageId}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${userData.jwt}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to download image');
+      }
+
+      const blob = await response.blob();
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = imageName;
+      link.click();
+    } catch (error) {
+      console.error(error);
+      setError('Error downloading image. Please try again.');
+    }
+  };
+
+  const openPopup = (image: Image) => {
+    setSelectedImage(image);
+  };
+
+  const closePopup = () => {
+    setSelectedImage(null);
+  };
+
   if (!userData) {
     return <Navigate to="/mainLogin" />;
-
   } else {
-      return (
-        <div>
-          <Navbar />
-          <div className='gallery'>
+    return (
+      <div>
+        <Navbar />
+        <Grid>
+        <div className='gallery'>
           {error && <div>{error}</div>}
-            {images.map((image) => {
-              return (
-                <div className='class="card"' key={image.id}>
-                  <img
-                    src={`${conf.apiPrefix}${image.attributes.picture.data[0].attributes.url}`}
-                    alt={image.attributes.Title}
-                  />
-                </div>
-              );
-            })}</div>
-          </div>
-      );
-  }
+          {images.map((image) => (
+            <div className='class="card"' key={image.id}>
+              <img
+                src={`${conf.apiPrefix}${image.attributes.picture.data[0].attributes.url}`}
+                alt={image.attributes.Title}
+                onClick={() => openPopup(image)}
+              />
+            </div>
+          ))}
+        </div>
+        </Grid>
+
+        <Dialog open={Boolean(selectedImage)} onClose={closePopup} maxWidth="sm" fullWidth>
+          <Grid container spacing={1} sx={{backgroundColor: '#F8F4EC'}}>
+            <Grid item xs={6}>
+            <DialogContent>
+            <Grid container spacing={2}>
+              <Grid item xs={12} md={12}>
+                <img
+                  src={`${conf.apiPrefix}${selectedImage?.attributes.picture.data[0].attributes.url}`}
+                  alt={selectedImage?.attributes.Title}
+                  style={{ width: '100%', height: '300px' }}
+                />
+              </Grid>
+            </Grid>
+          </DialogContent>
+        </Grid>
+          <Grid item xs={6}> 
+           <Grid item xs={11} mt={3}>
+             
+             <Stack
+              direction="row"
+              spacing={17}
+             >
+              <Avatar/>
+              <Box>
+              <Button 
+                onClick={() => handleDownload(selectedImage?.attributes.picture.data[0].attributes.url || '', selectedImage?.attributes.Title || '')}
+                sx={{
+                  '&:hover': {
+                    background: 'rgb(44, 200, 44)',
+                    color: 'white'
+                  }, 
+                  width: "100px",
+                }}
+                variant="contained"
+              >
+                Download
+              </Button>
+              </Box>
+            </Stack>
+            <Stack sx={{mt: 3}} justifyContent="flex-start" spacing={1.5}>
+              <span>User:</span>
+              <span>Email: {selectedImage?.attributes.email}</span>
+              <span>Title: {selectedImage?.attributes.Title}</span>
+              <span>Description:  {selectedImage?.attributes.description || "-----------"}</span>
+            </Stack>
+          </Grid>
+        </Grid>
+      </Grid>
+     </Dialog>
+  </div>
+  );
+ }
 };
 
 export default Home;
