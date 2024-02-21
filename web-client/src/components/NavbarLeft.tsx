@@ -45,16 +45,36 @@ export default function Navbar() {
                 <ArrowBackIosNewIcon />
             </IconButton>
           }
-        <a className='active'>
-            <HomeIcon sx={{ ml: 1 }} onClick={handleHome}/> 
+        <a className='active' onClick={handleHome}>
+            {collapsed ?
+            <HomeIcon sx={{ ml: 1 }} /> 
+            :<>
+                <HomeIcon sx={{ ml: 1 }} /> 
+                <span>Home</span>
+            </>
+            
+            }
         </a> 
-        <a className='active'>
-            <AddIcon sx={{ ml: 1 }} onClick={handleAdd}/>
+        <a className='active' onClick={handleHome}>
+            {collapsed ?
+                <AddIcon sx={{ ml: 1 }} /> 
+            :<>
+                <AddIcon sx={{ ml: 1 }}/> 
+                <span>Add</span>
+            </>
+            
+            }
         </a> 
-        <a className='active'>
-            <ImageIcon sx={{ ml: 1 }} onClick={handleUserPrivate}/>
-        </a> 
-        
-        </div>
+        <a className='active' onClick={handleHome}>
+            {collapsed ?
+                <ImageIcon sx={{ ml: 1 }} /> 
+            :<>
+                <ImageIcon sx={{ ml: 1 }} /> 
+                <span>Edit</span>
+            </>
+            
+            }
+        </a>
+      </div>
     );
 }
