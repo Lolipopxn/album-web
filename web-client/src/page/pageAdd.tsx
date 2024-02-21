@@ -71,11 +71,13 @@ const Add = () => {
 
     const formData = new FormData();
 
-    formData.append("files.picture", image!);
     formData.append("data", JSON.stringify({
       Title,
       description,
+      email: user.email,
     }));
+
+    formData.append("files.picture", image!);
 
     try {
       const response = await fetch(`${conf.apiPrefix}/api/images`, {

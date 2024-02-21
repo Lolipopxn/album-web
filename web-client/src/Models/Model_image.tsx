@@ -3,6 +3,7 @@ export default interface Image {
     attributes: {
       Title: string;
       description: string;
+      email: string;
       picture: {
         data: [{
           attributes: {
