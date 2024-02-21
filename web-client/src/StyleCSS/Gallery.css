@@ -11,6 +11,7 @@ img {
   height: 100%;
   display: block;
   object-fit: cover;
+  border-radius: 30px;
 }
 
 .gallery {
@@ -20,14 +21,14 @@ img {
   grid-template-columns: repeat(14, 30%);
   grid-template-rows: repeat(2, 100%);
   gap: 10px;
-  margin-inline: 15px;
+  margin-inline: 14px;
   margin-top: 30px;
 }
 
 .gallery > .card {
   border-radius: 10px;
   overflow: hidden;
-  border: 1px solid rgb(77, 77, 77);
+  border: 1px solid rgb(107, 104, 104);
 }
 
 .card:nth-child(1) {

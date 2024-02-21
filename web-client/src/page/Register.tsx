@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2'
 import conf from '../conf';
 import Button from '@mui/material/Button';
-import './login.css';
+import '../StyleCSS/login.css';
 
 const initialUser = { email: '', password: '', username: ''};
 

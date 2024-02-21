@@ -368,6 +368,7 @@ export interface ApiImageImage extends Schema.CollectionType {
     singularName: 'image';
     pluralName: 'images';
     displayName: 'image';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -376,6 +377,7 @@ export interface ApiImageImage extends Schema.CollectionType {
     picture: Attribute.Media & Attribute.Required;
     Title: Attribute.String;
     description: Attribute.Text;
+    email: Attribute.Email & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -720,7 +722,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
   options: {
     draftAndPublish: false;
-    timestamps: true;
   };
   attributes: {
     username: Attribute.String &

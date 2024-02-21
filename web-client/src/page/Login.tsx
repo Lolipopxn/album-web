@@ -8,7 +8,7 @@ import { storeUser } from '../helper';
 import Swal from 'sweetalert2'
 import conf from '../conf';
 import Button from '@mui/material/Button';
-import './login.css';
+import '../StyleCSS/login.css';
 
 const initialUser = { identifier: '', password: ''};
 

@@ -14,14 +14,17 @@ export default function Navbar() {
 
     const handleHome = () => {
         navigate('/');
+        window.location.reload();
       };
 
     const handleUserPrivate = () => {
         navigate('/ViewGallery');
+        window.location.reload();
     };
 
     const handleAdd = () => {
         navigate('/Add');
+        window.location.reload();
     };
 
     const toggleSidebar = () => {
@@ -43,7 +46,7 @@ export default function Navbar() {
             </IconButton>
           }
         <a className='active'>
-            <HomeIcon sx={{ ml: 1 }} onClick={handleHome}/>
+            <HomeIcon sx={{ ml: 1 }} onClick={handleHome}/> 
         </a> 
         <a className='active'>
             <AddIcon sx={{ ml: 1 }} onClick={handleAdd}/>
