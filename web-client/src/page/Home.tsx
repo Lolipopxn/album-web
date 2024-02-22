@@ -27,7 +27,14 @@ const Home = () => {
       try {
         const imageRepository = new ImageRepository();
         const fetchedImages = await imageRepository.getAll();
-        setImages(fetchedImages || []);
+
+        const sortedImages = (fetchedImages as Image[]).sort((a, b) => {
+          const dateA = new Date(a.attributes.createdAt);
+          const dateB = new Date(b.attributes.createdAt);
+          return dateB.getTime() - dateA.getTime();
+        });
+
+        setImages(sortedImages || []);
       } catch (error) {
         setError("Error fetching images. Please try again.");
       }

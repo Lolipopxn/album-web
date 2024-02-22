@@ -5,6 +5,7 @@ export default interface Image {
       description: string;
       email: string;
       user_name: string;
+      createdAt: Date;
       picture: {
         data: [{
           attributes: {
