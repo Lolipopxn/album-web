@@ -5,7 +5,6 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import Menu from '@mui/material/Menu';
 import Avatar from '@mui/material/Avatar';
@@ -15,6 +14,8 @@ import { createSvgIcon } from '@mui/material/utils';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
+import '../StyleCSS/Navbar.css';
+
 const settings = ['Profile', 'Logout'];
 
 const getUser = () => {
@@ -45,11 +46,11 @@ const Search = styled('div')(({ theme }) => ({
   '&:hover': {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
-  marginLeft: theme.spacing(25),
+  marginLeft: theme.spacing(19.5),
   marginRight: 0,
   width: '100%',
   [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(20),
+    marginLeft: theme.spacing(23),
     width: 'auto',
   },
 }));
@@ -107,15 +108,7 @@ export default function Navbar({ setSearchTerm }: NavbarProps) {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: '#8e24aa' }}>
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
+            <img className='Logo' src={`${process.env.PUBLIC_URL}/LogoWeb.png`} alt="Logo" />
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Godzilla
           </Typography>
