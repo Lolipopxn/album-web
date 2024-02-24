@@ -15,8 +15,6 @@ import { createSvgIcon } from '@mui/material/utils';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled, alpha } from '@mui/material/styles';
 import InputBase from '@mui/material/InputBase';
-
-
 const settings = ['Profile', 'Logout'];
 
 const getUser = () => {
@@ -70,17 +68,20 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: 'inherit',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
-    width: '100%',
+    width: '32ch',
     [theme.breakpoints.up('md')]: {
-      width: '100ch',
+      width: '60ch',
     },
   },
 }));
 
-export default function Navbar() {
+interface NavbarProps {
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export default function Navbar({ setSearchTerm }: NavbarProps) {
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
   const navigate = useNavigate();
   const userData = getUser();
@@ -98,13 +99,9 @@ export default function Navbar() {
   };
 
   const Logout = () => {
-      localStorage.removeItem('user')
-      navigate('/')
-  }
-
-  const handleAdd = () => {
-    navigate('/Add')
-}
+    localStorage.removeItem('user');
+    navigate('/');
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -123,20 +120,21 @@ export default function Navbar() {
             Godzilla
           </Typography>
 
-          <Search>
+          <Search sx={{ flexGrow: 1 }}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
           </Search>
 
-          <IconButton sx={{mr: 2}} onClick={handleAdd}>
-            <PlusIcon sx={{color: '#FFFFFF'}}/>
+          <IconButton sx={{ mr: 2 }} onClick={() => navigate('/Add')}>
+            <PlusIcon sx={{ color: '#FFFFFF' }} />
           </IconButton>
-            
+
           <Typography variant="body2" sx={{ mr: 1, color: 'white' }}>
             {userData.username}
           </Typography>
@@ -164,16 +162,15 @@ export default function Navbar() {
                 open={Boolean(anchorElUser)}
                 onClose={handleCloseUserMenu}
               >
-                  {settings.map((setting) => (
-                    <MenuItem
-                      key={setting}
-                      onClick={setting === 'Logout' ? Logout : handleCloseUserMenu}
-                      sx={{ mr: 2 }}
-                    >
-                      <Typography textAlign="center">{setting}</Typography>
-                    </MenuItem>
-                    
-                  ))}
+                {settings.map((setting) => (
+                  <MenuItem
+                    key={setting}
+                    onClick={setting === 'Logout' ? Logout : handleCloseUserMenu}
+                    sx={{ mr: 2 }}
+                  >
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem>
+                ))}
               </Menu>
             </Box>
           ) : (

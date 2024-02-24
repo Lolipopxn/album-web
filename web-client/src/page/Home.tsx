@@ -21,18 +21,22 @@ const Home = () => {
   const userData = getUser();
   const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState<Image | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchImages = async () => {
       try {
         const imageRepository = new ImageRepository();
         const fetchedImages = await imageRepository.getAll();
-
         const sortedImages = (fetchedImages as Image[]).sort((a, b) => {
           const dateA = new Date(a.attributes.createdAt);
           const dateB = new Date(b.attributes.createdAt);
           return dateB.getTime() - dateA.getTime();
         });
+
+        const filteredImages = sortedImages.filter(image =>
+          image.attributes.Title.toLowerCase().includes(searchTerm.toLowerCase())
+        );
 
         setImages(sortedImages || []);
       } catch (error) {
@@ -41,7 +45,7 @@ const Home = () => {
     };
 
     fetchImages();
-  }, []);
+  }, [ [searchTerm]]);
 
   const handleDownload = async (imageId: string, imageName: string) => {
     try {
@@ -80,22 +84,25 @@ const Home = () => {
   } else {
     return (
       <div>
-        <Navbar />
+        <Navbar setSearchTerm={setSearchTerm} />
         <Grid>
-        <div className='gallery'>
-          {error && <div>{error}</div>}
-          {images.map((image) => (
-            <div className='class="card"' key={image.id}>
-              <img
-                src={`${conf.apiPrefix}${image.attributes.picture.data[0].attributes.url}`}
-                alt={image.attributes.Title}
-                onClick={() => openPopup(image)}
-              />
-            </div>
-          ))}
-        </div>
+          <div className='gallery'>
+            {error && <div>{error}</div>}
+            {(searchTerm.trim() === '' ? images : images.filter(image =>
+              image.attributes.Title.toLowerCase().includes(searchTerm.toLowerCase())
+            )).map((image) => (
+              <div className='class="card"' key={image.id}>
+                <img
+                  className='ImgST'
+                  src={`${conf.apiPrefix}${image.attributes.picture.data[0].attributes.url}`}
+                  alt={image.attributes.Title}
+                  onClick={() => openPopup(image)}
+                />
+              </div>
+            ))}
+          </div>
         </Grid>
-
+        
         <Dialog open={Boolean(selectedImage)} onClose={closePopup} maxWidth="sm" fullWidth>
           <Grid container spacing={1} sx={{backgroundColor: '#F8F4EC'}}>
             <Grid item xs={6}>
@@ -103,6 +110,7 @@ const Home = () => {
             <Grid container spacing={2}>
               <Grid item xs={12} md={12}>
                 <img
+                  className='ImgST'
                   src={`${conf.apiPrefix}${selectedImage?.attributes.picture.data[0].attributes.url}`}
                   alt={selectedImage?.attributes.Title}
                   style={{ width: '100%', height: '300px' }}
