@@ -5,6 +5,7 @@ import { ImageRepository } from '../Repository/ImageRepository';
 import conf from "../conf";
 import { Navigate, useNavigate } from 'react-router-dom';
 import '../StyleCSS/Gallery.css';
+import '../StyleCSS/Loader.css';
 import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Grid, Stack } from '@mui/material';
 
 const getUser = () => {
@@ -20,12 +21,14 @@ const Home = () => {
   const [error, setError] = useState<string | null>(null);
   const userData = getUser();
   const navigate = useNavigate();
+  const [loader, setLoader] = useState(false);
   const [selectedImage, setSelectedImage] = useState<Image | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchImages = async () => {
       try {
+        setLoader(true);
         const imageRepository = new ImageRepository();
         const fetchedImages = await imageRepository.getAll();
         const sortedImages = (fetchedImages as Image[]).sort((a, b) => {
@@ -39,13 +42,14 @@ const Home = () => {
         );
 
         setImages(sortedImages || []);
+        setLoader(false);
       } catch (error) {
         setError("Error fetching images. Please try again.");
       }
     };
 
     fetchImages();
-  }, [ [searchTerm]]);
+  }, []);
 
   const handleDownload = async (imageId: string, imageName: string) => {
     try {
@@ -85,13 +89,18 @@ const Home = () => {
     return (
       <div>
         <Navbar setSearchTerm={setSearchTerm} />
-        <Grid>
+
+      <Grid>
+        <div className='Box'>
+          <h2 className='Font-header'>Image</h2>
+
+          {loader ? <div className="loader"></div> :
           <div className='gallery'>
             {error && <div>{error}</div>}
             {(searchTerm.trim() === '' ? images : images.filter(image =>
               image.attributes.Title.toLowerCase().includes(searchTerm.toLowerCase())
             )).map((image) => (
-              <div className='class="card"' key={image.id}>
+              <div className="class='card'" key={image.id}>
                 <img
                   className='ImgST'
                   src={`${conf.apiPrefix}${image.attributes.picture.data[0].attributes.url}`}
@@ -99,10 +108,12 @@ const Home = () => {
                   onClick={() => openPopup(image)}
                 />
               </div>
-            ))}
+            ))}  
+            </div>}
           </div>
         </Grid>
-        
+      
+
         <Dialog open={Boolean(selectedImage)} onClose={closePopup} maxWidth="sm" fullWidth>
           <Grid container spacing={1} sx={{backgroundColor: '#F8F4EC'}}>
             <Grid item xs={6}>

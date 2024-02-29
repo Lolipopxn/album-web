@@ -1,9 +1,200 @@
-.image-add {
-    border: "2px dashed #ccc";
-    padding: "100px";
-    max-width: "300px";
-    margin-Top: "50px";
-    margin-Left: "400px";
-    text-Align: "center";
-    cursor: "pointer";
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+:root {
+    --primary: #8800ff;
+    --primary-hover: #6c00ca;
+    --bg: #111315;
+    --secondary: #262626;
+    --secondary-hover: #383838;
+    --dropzone-bg: #1A1C1E;
+    --gray: #D3D3D3;
+    --border: #333333;
+    --dropzone-border: #FFF;
+    --headline: #FFF;
+    --text: #FFF;
+    --primary-text: #F2F7FE;
+    --dropzone-over: var(--secondary);
+}
+
+
+*::selection {
+    background: var(--primary);
+    color: var(--btn-text);
+}
+
+.dropzone-box {
+    margin-left: 500px;
+    margin-top: 20px;
+    border-radius: 1rem;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    max-width: 36rem;
+    border: 1px solid var(--border);
+    width: 100%;
+    background: var(--dropzone-bg);
+}
+
+.dropzone-box h2 {
+    font-size: 1.4rem;
+    margin-bottom: 0.6rem;
+    color: var(--headline);
+}
+
+.dropzone-box p {
+    font-size: 1.15rem;
+    color: var(--gray);
+}
+
+.dropzone-area {
+    padding: 1rem;
+    position: relative;
+    margin-top: 1.5rem;
+    min-height: 16rem;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: 2px dashed var(--dropzone-border);
+    border-radius: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dropzone-area .file-info {
+    font-size: 1.1rem;
+}
+
+.dropzone-area [type="file"] {
+    cursor: pointer;
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.dropzone-area .file-upload-icon svg {
+    height: 6rem;
+    max-width: 6rem;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    stroke: var(--headline);
+}
+
+.dropzone-area:hover {
+    background: var(--dropzone-over);
+}
+
+.dropzone--over {
+    border: 2px solid var(--primary);
+    background: var(--dropzone-over);
+}
+
+.dropzone-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.dropzone-actions button {
+    flex-grow: 1;
+    min-height: 3rem;
+    font-size: 1.2rem;
+    border: none;
+    transition: background 0.3s ease;
+}
+
+
+.dropzone-actions button[type='reset'] {
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    color: var(--text);
+    background: var(--secondary);
+    cursor: pointer;
+    border: 1px solid var(--border);
+}
+
+.dropzone-actions button[type='reset']:hover {
+    background: var(--secondary-hover);
+}
+
+.dropzone-actions button[type='submit'] {
+    background: var(--primary);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    color: var(--primary-text);
+    border: none;
+    cursor: pointer;
+}
+
+.dropzone-actions button[type='submit']:hover {
+    background: var(--primary-hover);
+}
+
+.label{
+    color: #ffffff;
+}
+
+@media screen and (max-width: 6500px){
+    .dropzone-box {
+        margin-left: 50%;
+        margin-top: 15%;
+        transform: scale(3);
+        
+
+    }
+  }
+@media screen and (max-width: 5000px){
+    .dropzone-box {
+        margin-left: 50%;
+        margin-top: 15%;
+        transform: scale(2.5);
+
+    }
+}
+
+@media screen and (min-width: 3001px) and (max-width:4600px) {
+    .dropzone-box {
+        margin-left: 45%;
+        margin-top: 10%;
+        transform: scale(1.8);
+
+    }
+}
+
+@media screen and (min-width: 1601px) and (max-width:3000px) {
+    .dropzone-box {
+        margin-left: 40%;
+        margin-top: 4%;
+        transform: scale(1);
+
+    }
+}
+
+@media screen and (min-width: 1024px) and (max-width:1600px) {
+    .dropzone-box {
+        margin-left: 35%;
+        margin-top: 1%;
+        transform: scale(0.9);
+
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .dropzone-box {
+        margin-left: 10%;
+        margin-top: -14%;
+        transform: scale(0.6);
+
+    }
 }

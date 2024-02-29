@@ -4,9 +4,13 @@ import conf from "../conf";
 import { Button, TextField } from "@mui/material";
 import User from "../Models/Model_User";
 import Swal from 'sweetalert2'
+import { useNavigate } from 'react-router-dom';
 import withReactContent from 'sweetalert2-react-content'
 import { Grid } from '@mui/material';
 import NavbarLeft from "../components/NavbarLeft";
+import '../StyleCSS/PageAdd.css';
+import '../StyleCSS/Loader.css';
+import '../helper';
 
 const Add = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -16,12 +20,16 @@ const Add = () => {
   const [Title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const navigate = useNavigate()
+  const [loader, setLoader] = useState(false);
 
   useEffect(() => {
+    setLoader(true);
     const userData = localStorage.getItem("user");
     if (userData) {
       const parsedUserData = JSON.parse(userData);
       setUser(parsedUserData);
+    setLoader(false);
     }
   }, []);
 
@@ -40,6 +48,11 @@ const Add = () => {
     }
   };
 
+  const handleCancel = () => {
+    navigate('/Add');
+    window.location.reload();
+  };
+
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     const files = event.dataTransfer.files;
@@ -54,9 +67,9 @@ const Add = () => {
     event: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     event.preventDefault();
-
+    
     if (!user) {
-      alert("You are not authorized to create an activity.");
+      alert("You are not authorized to create an image.");
       return;
     }
 
@@ -76,6 +89,7 @@ const Add = () => {
       description,
       user_name: user.username,
       email: user.email,
+
     }));
 
     formData.append("files.picture", image!);
@@ -120,56 +134,56 @@ const Add = () => {
     
     <div>
       <NavbarLeft />
-      <form onSubmit={handleSubmit}>
-        <div
-          style={{
-            border: "2px dashed #ccc",
-            padding: "10px",
-            maxWidth: "500px",
-            minHeight: "200px",
-            marginTop: "50px",
-            marginLeft: "510px",
-            cursor: "pointer",
-          }}
+      <form className="dropzone-box" onSubmit={handleSubmit}>
+        <h2>Upload files</h2>
+        <p>Click to upload or drag and drop</p>
+        <div 
+          className="dropzone-area"
           onDrop={handleDrop}
           onDragOver={(e) => e.preventDefault()}
           onClick={handleFileClick}
-        >
-          <input
-            ref={fileInputRef}
-            type="file"
-            accept="picture/*"
-            style={{ display: "none" }}
-            onChange={handleFileChange}
-          />
-          {imageUrl && <img src={imageUrl} alt="Selected or dropped image" style={{ maxWidth: "500px",}} />}
-          {!imageUrl && <p
-            style={{
-                marginTop: "100px",
-                marginLeft: "100px",
-            }}
           >
-            drop a file here, or click to select a file.
-         </p>}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="picture/*"
+              style={{ display: "none" }}
+              onChange={handleFileChange}
+            />
+            {imageUrl && <img src={imageUrl} alt="Selected or dropped image" style={{ maxWidth: "480px",}} />}
+          {!imageUrl && 
+          <>
+          <div className="file-upload-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-cloud-upload" width="24"
+              height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M7 18a4.6 4.4 0 0 1 0 -9a5 4.5 0 0 1 11 2h1a3.5 3.5 0 0 1 0 7h-1" />
+              <path d="M9 15l3 -3l3 3" />
+              <path d="M12 12l0 9" />
+          </svg>
+      </div>
+      
+          <p
+            className="file-info"
+          >
+            No Files Selected
+          </p>
+         </>}
         </div>
-        
-        <Grid container justifyContent="center">
-      <Grid >
-        <label>
-            <center>
-                <h4>Add Picture</h4>
-            </center>
-        </label>
-        <label>Title</label>
+
+        <label className="label">Title</label>
         <form onSubmit={handleSubmit}>
           <TextField
+            sx={{backgroundColor: 'white'}}
             variant="outlined"
             fullWidth
             value={Title}
             onChange={(event) => setTitle(event.target.value)}
           />
-          <label>Description</label>
+          <label className="label">Description</label>
           <TextField
+            sx={{backgroundColor: 'white'}}
             variant="outlined"
             fullWidth
             multiline
@@ -177,15 +191,17 @@ const Add = () => {
             onChange={(event) => setDescription(event.target.value)}
           />
         </form>
-      </Grid>
-    </Grid>
-    <Button type="submit" variant="contained" color="primary" sx={{ position: 'fixed' ,left: 1300,bottom:600, ml: 10, mt: 2,
-            '&:hover': {
-            background: 'rgb(18, 187, 41)',color: 'white'
-            }}}>
-            Save
-          </Button>
-      </form>
+
+        <div className="dropzone-actions">
+            <button type="reset" onClick={handleCancel}>
+                Cancel
+            </button>
+            <button id="submit-button" type="submit">
+                Save
+            </button>
+        </div>
+    </form>
+
     </div>
   );
 }

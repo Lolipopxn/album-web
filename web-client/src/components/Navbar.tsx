@@ -48,7 +48,7 @@ const Search = styled('div')(({ theme }) => ({
   },
   marginLeft: theme.spacing(19.5),
   marginRight: 0,
-  width: '100%',
+  width: '10%',
   [theme.breakpoints.up('sm')]: {
     marginLeft: theme.spacing(23),
     width: 'auto',
@@ -71,9 +71,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
     transition: theme.transitions.create('width'),
-    width: '32ch',
+    width: '0ch',
     [theme.breakpoints.up('md')]: {
-      width: '60ch',
+      width: '1000px',
     },
   },
 }));
@@ -106,15 +106,15 @@ export default function Navbar({ setSearchTerm }: NavbarProps) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ backgroundColor: '#8e24aa' }}>
+      <AppBar position="static" sx={{ borderBottom: 3, backgroundColor: 'transparent', boxShadow: 'none' }}>
         <Toolbar>
             <img className='Logo' src={`${process.env.PUBLIC_URL}/LogoWeb.png`} alt="Logo" />
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" component="div" sx={{color:'black', flexGrow: 1 }}>
             Godzilla
           </Typography>
 
-          <Search sx={{ flexGrow: 1 }}>
-            <SearchIconWrapper>
+          <Search sx={{color:'black', flexGrow: 1 }}>
+            <SearchIconWrapper >
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
@@ -125,11 +125,11 @@ export default function Navbar({ setSearchTerm }: NavbarProps) {
           </Search>
 
           <IconButton sx={{ mr: 2 }} onClick={() => navigate('/Add')}>
-            <PlusIcon sx={{ color: '#FFFFFF' }} />
+            <PlusIcon sx={{ color: 'black' }} />
           </IconButton>
 
-          <Typography variant="body2" sx={{ mr: 1, color: 'white' }}>
-            {userData.username}
+          <Typography variant="body2" sx={{ mr: 1, color: 'black' , overflow: 'hidden'}}>
+              {userData.username}
           </Typography>
 
           {userData ? (
