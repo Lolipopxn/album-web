@@ -14,6 +14,8 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import DeleteIcon from '@mui/icons-material/Delete';
 import NavBarLeft from '../components/NavbarLeft';
+import '../StyleCSS/View.css';
+import '../StyleCSS/Loader.css';
 
 const user = userData();
 
@@ -23,14 +25,17 @@ export default function UserPrivate() {
   const [selectedImage, setSelectedImage] = useState<Image | null>(null);
   const [Title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
+  const [loader, setLoader] = useState(false);
 
   const fetchImg = async () => {
     try {
+      setLoader(true);
       const result = await repository.userResult.getAll();
       if (result) {
         const userImages = result.filter(img => img.attributes.email === user.email);
         setIMG(userImages);
       }
+      setLoader(false);
     } catch (error) {
       console.error(error);
     }
@@ -119,13 +124,15 @@ export default function UserPrivate() {
         <NavBarLeft />
       </div>
       <div style={{ position: 'relative', zIndex: 1 }}>
-        <Grid container spacing={3} sx={{ ml: 10, mt: 2 }}>
+      <div className="view-header"></div>
+      {loader ? <div className="loader"></div> :
+       <div className="main-view">
           {IMG.map((img, index) => (
-            <Grid item xs={12} sm={6} md={2} key={index}>
+            <Grid  key={index}>
               <Box sx={{ p: 2 }}>
-                <Card sx={{ maxWidth: 200, width: "%" }}>
+                <Card sx={{ ml: 3, mt: 2 ,border: 3 ,maxWidth: 300 }}>
                   <CardMedia
-                    sx={{ height: 100, cursor: 'pointer' }}
+                    sx={{ height: 220, cursor: 'pointer' }}
                     image={`${conf.apiPrefix}${img.attributes.picture.data[0].attributes.url}`}
                     onClick={() => handleImageClick(img)}
                   />
@@ -154,7 +161,7 @@ export default function UserPrivate() {
               </Box>
             </Grid>
           ))}
-        </Grid>
+      </div>}
 
         <Dialog open={selectedImage !== null} onClose={handleCloseDialog} maxWidth="sm" fullWidth>
           <Grid container spacing={2}>

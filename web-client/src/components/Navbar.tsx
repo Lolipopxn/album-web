@@ -105,15 +105,15 @@ export default function Navbar({ setSearchTerm }: NavbarProps) {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ borderBottom: 3, backgroundColor: 'transparent', boxShadow: 'none' }}>
+    <Box sx={{ display: 'flex' }}>
+      <AppBar  component="nav"  sx={{ borderBottom: 3, backgroundColor: '#F6F5F5' }}>
         <Toolbar>
             <img className='Logo' src={`${process.env.PUBLIC_URL}/LogoWeb.png`} alt="Logo" />
-          <Typography variant="h6" component="div" sx={{color:'black', flexGrow: 1 }}>
+          <Typography variant="h5" component="div" sx={{color:'purple', flexGrow: 1 }}>
             Godzilla
           </Typography>
 
-          <Search sx={{color:'black', flexGrow: 1 }}>
+          <Search sx={{color:'black', flexGrow: 1  ,background: 'white'}}>
             <SearchIconWrapper >
               <SearchIcon />
             </SearchIconWrapper>

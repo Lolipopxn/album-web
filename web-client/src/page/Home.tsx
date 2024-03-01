@@ -87,9 +87,10 @@ const Home = () => {
     return <Navigate to="/mainLogin" />;
   } else {
     return (
-      <div>
+      
+      <div className='main'>
         <Navbar setSearchTerm={setSearchTerm} />
-
+      
       <Grid>
         <div className='Box'>
           <h2 className='Font-header'>Image</h2>

@@ -134,6 +134,8 @@ const Add = () => {
     
     <div>
       <NavbarLeft />
+      <div className="layout-bg">
+      <div className="box-layout">
       <form className="dropzone-box" onSubmit={handleSubmit}>
         <h2>Upload files</h2>
         <p>Click to upload or drag and drop</p>
@@ -200,9 +202,10 @@ const Add = () => {
                 Save
             </button>
         </div>
-    </form>
-
+      </form>
+     </div>
     </div>
+  </div>
   );
 }
 
