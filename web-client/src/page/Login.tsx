@@ -79,44 +79,49 @@ function SignIn() {
         <div className='main-bg'>
         <div className='main-container'>
         <div className='welcome-text'>Sign-in</div>
-        <Box component="form" onSubmit={handleLogin} sx={{ mt: 1 }} >
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="identifier"
-                    label="Email Address"
-                    name="identifier"
-                    autoComplete="email"
-                    onChange={handleChange}
-                    autoFocus
-                    
-                />
-                <TextField
-                    margin="normal"
-                    required
-                    fullWidth
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
-                    onChange={handleChange}
-                />
-                <Button
-                    type="submit"
-                    fullWidth
-                    variant="outlined"
-                    sx={{ mt: 3, mb: 2, backgroundColor: '#4CAF50', color: 'white' }}
-                >
-                    Login
-                </Button>
-              </Box>
+        <div className="login-Box">
+          <Box component="form" onSubmit={handleLogin} sx={{ mt: 1 }} >
+                  <TextField
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="identifier"
+                      label="Email Address"
+                      name="identifier"
+                      autoComplete="email"
+                      onChange={handleChange}
+                      autoFocus
+                      
+                  />
+                  <TextField
+                      margin="normal"
+                      required
+                      fullWidth
+                      name="password"
+                      label="Password"
+                      type="password"
+                      id="password"
+                      autoComplete="current-password"
+                      onChange={handleChange}
+                  />
+                  <Button
+                      type="submit"
+                      fullWidth
+                      variant="outlined"
+                      sx={{ mt: 3, mb: 2, backgroundColor: '#4CAF50', color: 'white' }}
+                  >
+                      Login
+                  </Button>
+                </Box>
+          </div>
         <div className='login-with'>OR LOGIN WITH</div>
         <div className='horizontal-rule' />
         <center>
-            <h6>Don't have account?</h6>
+            <div className="text-dha">
+              <h6>Don't have account?</h6>
+            </div>
         </center>
+        <div className="login-Box2">
         <Button
                     type="submit"
                     variant="contained"
@@ -125,6 +130,7 @@ function SignIn() {
                 >
                     Register
                 </Button>
+            </div>
       </div>
     </div>
   );

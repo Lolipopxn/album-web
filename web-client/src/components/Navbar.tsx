@@ -48,10 +48,10 @@ const Search = styled('div')(({ theme }) => ({
   },
   marginLeft: theme.spacing(19.5),
   marginRight: 0,
-  width: '10%',
+  width: 0,
   [theme.breakpoints.up('sm')]: {
     marginLeft: theme.spacing(23),
-    width: 'auto',
+    width: '70%',
   },
 }));
 
@@ -124,8 +124,8 @@ export default function Navbar({ setSearchTerm }: NavbarProps) {
             />
           </Search>
 
-          <IconButton sx={{ mr: 2 }} onClick={() => navigate('/Add')}>
-            <PlusIcon sx={{ color: 'black' }} />
+          <IconButton sx={{ ml: 3 }} onClick={() => navigate('/Add')}>
+            <PlusIcon sx={{ color: 'black'}} />
           </IconButton>
 
           <Typography variant="body2" sx={{ mr: 1, color: 'black' , overflow: 'hidden'}}>

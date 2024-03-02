@@ -6,13 +6,14 @@
 }
 
 body{
-  background-color: #F6F5F5
+  background-color: #F6F5F5;
+  overflow-x: hidden;
 }
 
 .ImgST {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: fill;
   border-radius: 30px;
   border: 3px solid #e7e0e0 ;
 }
@@ -24,23 +25,22 @@ body{
 
 .Box{
   width: 100%;
-  height: 90px;
+  height: 70px;
   background-color: #8E7AB5;
   border-radius: 30px;
   border: 3px solid #d9d2d2 ;
   margin-top: 7rem;
   transform: scale(0.95);
+
 }
 
 .gallery {
   width: 95%;
-  max-width: 1500px;
+  max-width: 100%;
   display:grid;
   gap: 10px;
   margin-inline: 50px;
   margin-top: 45px;
-
-
 }
 
 .gallery > .card {
@@ -53,62 +53,41 @@ body{
 
 @media screen and (max-width: 6501px){
   .gallery {
-    grid-template-columns: repeat(10, 39.7%);
-    grid-auto-rows: 60%;
-  }
-  .ImgST {
-    transform: scale(0.95);
-  }
-}
-
-@media screen and (max-width: 5000px){
-  .gallery {
-    grid-template-columns: repeat(10, 29.5%);
-    grid-auto-rows: 50%;
-  }
-  .ImgST {
-    transform: scale(0.97);
+    width: 97.5%;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-auto-rows: 35rem;
   }
 }
 
 @media screen and (min-width: 3001px) and (max-width:4600px) {
   .gallery {
-    grid-template-columns: repeat(9, 21.5%);
-    grid-auto-rows: 40%;
-  }
-  .ImgST {
-    transform: scale(0.98);
+    width: 97.5%;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-auto-rows: 30rem;
   }
 }
 
 @media screen and (min-width: 1601px) and (max-width:3000px) {
   .gallery {
-    grid-template-columns: repeat(6, 19.5%);
-    grid-auto-rows: 28%;
-  }
-  .ImgST {
-    transform: scale(0.98);
+    width: 95%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-auto-rows: 20rem;
   }
 }
 
 @media screen and (min-width: 1024px) and (max-width:1600px) {
   .gallery {
-    grid-template-columns: repeat(5, 19%);
-    grid-auto-rows: 30%;
-  }
-  .ImgST {
-    transform: scale(0.95);
+    width: 93%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-auto-rows: 17rem;
   }
 }
 
 @media screen and (max-width: 1000px) {
   .gallery {
-    grid-template-columns: repeat(4, 24%);
-    grid-auto-rows: 30%;
+    grid-template-columns: 1fr 1fr 1fr ;
+    grid-auto-rows: 13rem;
     margin-inline: 20px;
-  }
-  .ImgST {
-    transform: scale(0.95);
   }
 }
 
@@ -121,7 +100,7 @@ body{
 
 .Font-header{
   margin-left: 2rem;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   font-size: 25px;
   color:#F6F5F5;
 }
