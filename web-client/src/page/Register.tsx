@@ -49,8 +49,18 @@ function SignUp() {
         })
         return;
       }
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/;
+      if (!passwordRegex.test(user.password)) {
+        Swal.fire({
+          icon: 'error',
+          title: 'error',
+          text: "Password = ('A,B,...' + 'a,b,...' + '1,2,3,...')",
+        });
+        return;
+
+      }
       
-      const url = `${conf.apiPrefix}/api/auth/local/register`;
+     const url = `${conf.apiPrefix}/api/auth/local/register`;
       try {
         if (user.email && user.password && user.username) {
           const res = await axios.post(url, user)
