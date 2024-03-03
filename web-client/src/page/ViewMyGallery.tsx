@@ -1,6 +1,6 @@
 import { userData } from "../../src/helper";
 import Image from "../Models/Model_image";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
 import conf from '../conf';
 import Swal from 'sweetalert2';
@@ -118,6 +118,16 @@ export default function UserPrivate() {
     fetchImg();
   }, []);
 
+
+  if (!user) {
+    return (
+      <div>
+        {loader ? <div className="loader"></div> 
+        :
+        <Navigate to="/mainLogin" />}
+      </div>);
+
+  } else {
   return (
     <div>
       <div style={{ position: 'relative', zIndex: 2 }}>
@@ -210,4 +220,5 @@ export default function UserPrivate() {
       </div>
     </div>
   );
+}
 }

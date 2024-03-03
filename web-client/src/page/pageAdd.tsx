@@ -1,19 +1,30 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
 import conf from "../conf";
-import { Button, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import User from "../Models/Model_User";
 import Swal from 'sweetalert2'
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import withReactContent from 'sweetalert2-react-content'
-import { Grid } from '@mui/material';
+
 import NavbarLeft from "../components/NavbarLeft";
 import '../StyleCSS/PageAdd.css';
 import '../StyleCSS/Loader.css';
-import '../helper';
+import { userData } from "../../src/helper";
+
+const user = userData();
+
+const getUser = () => {
+  const User = localStorage.getItem("user") || "";
+  if (User) {
+    return JSON.parse(User);
+  }
+  return false;
+};
 
 const Add = () => {
-  const [user, setUser] = useState<User | null>(null);
+  const [users, setUser] = useState<User | null>(null);
+  const userData = getUser();
   const MySwal = withReactContent(Swal);
   const [image, setImage] = useState<File | null>(null);
   const [imageUrl, setImageUrl] = useState<string | null>(null);
@@ -129,11 +140,20 @@ const Add = () => {
     }
   };
 
-
-  return (
+  if (!userData) {
+    return (
+      <div>
+        {loader ? <div className="loader"></div> 
+        :
+        <Navigate to="/mainLogin" />}
+      </div>);
     
+  } else {
+  return (
     <div>
-      <NavbarLeft />
+      <div style={{ position: 'relative', zIndex: 2 }}>
+        <NavbarLeft />
+      </div>
       <div className="layout-bg">
       <div className="box-layout">
       <form className="dropzone-box" onSubmit={handleSubmit}>
@@ -152,7 +172,7 @@ const Add = () => {
               style={{ display: "none" }}
               onChange={handleFileChange}
             />
-            {imageUrl && <img src={imageUrl} alt="Selected or dropped image" style={{ maxWidth: "480px",}} />}
+            {imageUrl && <img className="img" src={imageUrl} alt="Selected or dropped image" style={{ maxWidth: "480px",}} />}
           {!imageUrl && 
           <>
           <div className="file-upload-icon">
@@ -207,6 +227,7 @@ const Add = () => {
     </div>
   </div>
   );
+  }
 }
 
 export default Add;
