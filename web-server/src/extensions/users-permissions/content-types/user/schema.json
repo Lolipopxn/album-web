@@ -64,6 +64,26 @@
       "target": "plugin::users-permissions.role",
       "inversedBy": "users",
       "configurable": false
+    },
+    "Avatar": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "Age": {
+      "type": "integer"
+    },
+    "description": {
+      "type": "text"
+    },
+    "Gender": {
+      "type": "string"
+    },
+    "tel": {
+      "type": "string"
     }
   }
 }

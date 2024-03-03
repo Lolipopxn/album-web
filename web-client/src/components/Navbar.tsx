@@ -91,6 +91,10 @@ export default function Navbar({ setSearchTerm }: NavbarProps) {
     navigate('/login');
   };
 
+  const handleProfileClick = () => {
+    navigate('/Profile');
+  };
+
   const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElUser(event.currentTarget);
   };
@@ -125,7 +129,7 @@ export default function Navbar({ setSearchTerm }: NavbarProps) {
           </Search>
 
           <IconButton sx={{ ml: 3 }} onClick={() => navigate('/Add')}>
-            <PlusIcon sx={{ color: 'black'}} />
+            <PlusIcon sx={{ color: 'purple'}} />
           </IconButton>
 
           <Typography variant="body2" sx={{ mr: 1, color: 'black' , overflow: 'hidden'}}>
@@ -140,7 +144,7 @@ export default function Navbar({ setSearchTerm }: NavbarProps) {
                 </IconButton>
               </Tooltip>
               <Menu
-                sx={{ mt: '45px' }}
+                sx={{ mt: '60px', ml:'20px'}}
                 id="menu-appbar"
                 anchorEl={anchorElUser}
                 anchorOrigin={{
@@ -156,20 +160,28 @@ export default function Navbar({ setSearchTerm }: NavbarProps) {
                 onClose={handleCloseUserMenu}
               >
                 {settings.map((setting) => (
-                  <MenuItem
-                    key={setting}
-                    onClick={setting === 'Logout' ? Logout : handleCloseUserMenu}
-                    sx={{ mr: 2 }}
-                  >
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
+                  <div>
+                    <MenuItem
+                      key={setting}
+                      onClick={() => {
+                        if (setting === 'Logout') {
+                          Logout();
+                        } else if (setting === 'Profile') {
+                          handleProfileClick();
+                        }
+                        handleCloseUserMenu();
+                      }}
+                    >
+                      <Typography textAlign="center">{setting}</Typography>
+                    </MenuItem>
+                 </div>
                 ))}
               </Menu>
             </Box>
           ) : (
-            <Button sx={{ mr: 3 }} color="inherit" onClick={handleLoginClick}>
-              Login
-            </Button>
+              <Button sx={{ mr: 3 }} color="inherit" onClick={handleLoginClick}>
+                Login
+              </Button>
           )}
         </Toolbar>
       </AppBar>
