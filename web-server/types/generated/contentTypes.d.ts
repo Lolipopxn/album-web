@@ -751,6 +751,11 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.role'
     >;
+    Avatar: Attribute.Media;
+    Age: Attribute.Integer;
+    description: Attribute.Text;
+    Gender: Attribute.String;
+    tel: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
