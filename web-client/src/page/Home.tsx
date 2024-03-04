@@ -118,6 +118,7 @@ const Home = () => {
                   alt={image.attributes.Title}
                   onClick={() => openPopup(image)}
                 />
+                <span className='Font-Style'>{image.attributes.Title}</span>
               </div>
             ))}  
             </div>}

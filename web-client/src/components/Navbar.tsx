@@ -116,7 +116,7 @@ export default function Navbar({ setSearchTerm }: NavbarProps) {
     <Box sx={{ display: 'flex' }}>
       <AppBar  component="nav"  sx={{ borderBottom: 3, backgroundColor: '#F6F5F5' }}>
         <Toolbar>
-        <img className='Logo' src={`${process.env.PUBLIC_URL}/LogoWeb.png`} alt="Logo" onClick={Home}/>
+            <img className='Logo' src={`${process.env.PUBLIC_URL}/LogoWeb.png`} alt="Logo" onClick={Home}/>
           <Typography variant="h5" component="div" sx={{color:'purple', flexGrow: 1 }}>
             Godzilliar
           </Typography>
