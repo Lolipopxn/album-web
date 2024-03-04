@@ -50,8 +50,8 @@ const Search = styled('div')(({ theme }) => ({
   marginRight: 0,
   width: 0,
   [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(23),
-    width: '70%',
+    marginLeft: theme.spacing(25),
+    width: '69%',
   },
 }));
 
@@ -108,16 +108,20 @@ export default function Navbar({ setSearchTerm }: NavbarProps) {
     navigate('/');
   };
 
+  const Home = () => {
+    navigate('/');
+  }
+
   return (
     <Box sx={{ display: 'flex' }}>
       <AppBar  component="nav"  sx={{ borderBottom: 3, backgroundColor: '#F6F5F5' }}>
         <Toolbar>
-            <img className='Logo' src={`${process.env.PUBLIC_URL}/LogoWeb.png`} alt="Logo" />
+        <img className='Logo' src={`${process.env.PUBLIC_URL}/LogoWeb.png`} alt="Logo" onClick={Home}/>
           <Typography variant="h5" component="div" sx={{color:'purple', flexGrow: 1 }}>
-            Godzilla
+            Godzilliar
           </Typography>
 
-          <Search sx={{color:'black', flexGrow: 1  ,background: 'white'}}>
+          <Search sx={{ml:22,color:'black', flexGrow: 1  ,background: 'white'}}>
             <SearchIconWrapper >
               <SearchIcon />
             </SearchIconWrapper>
