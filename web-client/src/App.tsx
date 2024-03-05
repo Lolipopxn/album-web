@@ -8,7 +8,7 @@ import Add from './page/pageAdd';
 import ViewGallery from './page/ViewMyGallery';
 import Profile from './page/pageProfile';
 
-export function App() {
+export default function App() {
   return (
     <BrowserRouter>
       <Routes>
